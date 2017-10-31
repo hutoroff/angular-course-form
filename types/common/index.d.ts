@@ -1,3 +1,5 @@
-/**
- * Created by hutoroff on 31.10.17.
- */
+type Tab = {
+  text: string,
+  id: string,
+  active?: boolean
+}
