@@ -1,39 +1,74 @@
 <div id="signup">
   <h1>Sign Up for Free</h1>
 
-  <form action="/" method="post">
+  <form [formGroup]="signupForm" (ngSubmit)="onFormSubmit(signupForm.value)">
 
     <div class="top-row">
       <div class="field-wrap">
-        <label>
+        <label for="fName">
           First Name<span class="req">*</span>
         </label>
-        <input type="text" required autocomplete="off" />
+        <div>
+          <input id="fName" type="text" formControlName="firstName" (input)="defineLabelState($event)"/>
+          <div *ngIf="signupForm.get('firstName').touched && signupForm.get('firstName').invalid" class="errors">
+            <ul>
+              <li *ngIf="signupForm.get('firstName').hasError('required')">{{requiredMsg}}</li>
+              <li *ngIf="signupForm.get('firstName').hasError('pattern')">{{formatMsg}}</li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <div class="field-wrap">
-        <label>
+        <label for="sName">
           Last Name<span class="req">*</span>
         </label>
-        <input type="text"required autocomplete="off"/>
+        <div>
+          <input id="sName" type="text" formControlName="secondName" (input)="defineLabelState($event)"/>
+          <div *ngIf="signupForm.get('secondName').touched && signupForm.get('secondName').invalid" class="errors">
+            <ul>
+              <li *ngIf="signupForm.get('secondName').hasError('required')">{{requiredMsg}}</li>
+              <li *ngIf="signupForm.get('secondName').hasError('pattern')">{{formatMsg}}</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="field-wrap">
-      <label>
+      <label for="email">
         Email Address<span class="req">*</span>
       </label>
-      <input type="email"required autocomplete="off"/>
+      <div>
+        <input id="email" type="email" formControlName="email" (input)="defineLabelState($event)"/>
+        <div *ngIf="signupForm.get('email').touched && signupForm.get('email').invalid" class="errors">
+          <ul>
+            <li *ngIf="signupForm.get('email').hasError('required')">{{requiredMsg}}</li>
+            <li *ngIf="signupForm.get('email').hasError('email')">{{formatMsg}}</li>
+            <li *ngIf="signupForm.get('email').hasError('alreadyExist')">{{registeredMsg}}</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="field-wrap">
-      <label>
-        Set A Password<span class="req">*</span>
+      <label for="password">
+        Password<span class="req">*</span>
       </label>
-      <input type="password"required autocomplete="off"/>
+      <div>
+        <input id="password" type="password" formControlName="password" (input)="defineLabelState($event)"/>
+        <div *ngIf="signupForm.get('password').touched && signupForm.get('password').invalid" class="errors">
+          <ul>
+            <li *ngIf="signupForm.get('password').hasError('required')">{{requiredMsg}}</li>
+            <li *ngIf="signupForm.get('password').hasError('minlength')">
+              {{minLengthMsg + signupForm.get('password').getError('minlength').requiredLength}}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <button type="submit" class="button button-block">Get Started</button>
+    <button type="submit" class="button button-block" [disabled]="signupForm.invalid">Get Started</button>
 
   </form>
 

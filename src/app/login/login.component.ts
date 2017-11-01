@@ -5,13 +5,17 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+
+  public LOGIN_FORM_ID: string = 'login';
+  public SIGNUP_FORM_ID: string = 'signup';
 
   public selectedTab: string;
 
-  constructor() { }
-
-  ngOnInit() {
+  public showLoginForm(signupSucces: boolean): void {
+    if(signupSucces) {
+      this.selectedTab = this.LOGIN_FORM_ID;
+    }
   }
 
 }
