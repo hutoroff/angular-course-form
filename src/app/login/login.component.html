@@ -1,7 +1,7 @@
 <div class="root">
   <div class="form">
     <app-selector (tabSelection)="selectedTab=$event"></app-selector>
-    <app-login-form *ngIf="selectedTab===LOGIN_FORM_ID"></app-login-form>
+    <app-login-form *ngIf="selectedTab===LOGIN_FORM_ID" (showSignup)="showSignupForm($event)"></app-login-form>
     <app-signup-form *ngIf="selectedTab===SIGNUP_FORM_ID" (signupSuccess)="showLoginForm($event)"></app-signup-form>
   </div>
 </div>

@@ -12,6 +12,11 @@ export class LoginComponent {
 
   public selectedTab: string;
 
+  public showSignupForm(show: boolean): void {
+    if(show) {
+      this.selectedTab = this.SIGNUP_FORM_ID;
+    }
+  }
   public showLoginForm(signupSucces: boolean): void {
     if(signupSucces) {
       this.selectedTab = this.LOGIN_FORM_ID;

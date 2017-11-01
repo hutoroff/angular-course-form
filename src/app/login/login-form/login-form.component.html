@@ -1,24 +1,36 @@
 <div id="login">
   <h1>Welcome Back!</h1>
-  <form action="/" method="post">
+  <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit(loginForm.value)">
 
     <div class="field-wrap">
-      <label>
+      <label for="email">
         Email Address<span class="req">*</span>
       </label>
-      <input type="email"required autocomplete="off"/>
+      <div>
+        <input id="email" type="email" formControlName="email" (input)="defineLabelState($event)"/>
+        <div *ngIf="loginForm.get('email').touched && loginForm.get('email').invalid" class="errors">
+          <ul>
+            <li *ngIf="loginForm.get('email').hasError('required')">{{requiredMsg}}</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="field-wrap">
-      <label>
+      <label for="password">
         Password<span class="req">*</span>
       </label>
-      <input type="password"required autocomplete="off"/>
+      <div>
+        <input id="password" type="password" formControlName="password" (input)="defineLabelState($event)"/>
+        <div *ngIf="loginForm.get('password').touched && loginForm.get('email').invalid" class="errors">
+          <ul>
+            <li *ngIf="loginForm.get('password').hasError('required')">{{requiredMsg}}</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <p class="forgot"><a href="#">Forgot Password?</a></p>
-
-    <button class="button button-block">Log In</button>
+    <button [disabled]="loginForm.invalid" class="button button-block">Log In</button>
 
   </form>
 </div>

@@ -135,3 +135,7 @@ button[disabled], button[disabled]:hover, button[disabled]:focus {
   background: rgba(160, 179, 176, 0.25);
   color: #a0b3b0;
 }
+
+.errors {
+  color: lightgreen;
+}
